@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="snake_tutorial"
+config/name="Bens_snake"
+config/description="bens cool snake game with inspiration and initial code from Coding With Ross godot tutorial"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
