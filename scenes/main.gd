@@ -1,3 +1,4 @@
+#sounds from opengameart.org under public domain licence
 extends Node
 
 @export var snake_scene : PackedScene
