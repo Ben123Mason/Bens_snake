@@ -4,6 +4,7 @@ extends Node
 
 #game variables
 var score : int
+var potions : int
 var game_started : bool = false
 
 #grid variables
@@ -39,6 +40,8 @@ func new_game():
 	$GameOverMenu.hide()
 	score = 0
 	$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
+	potions = 3
+	$Hud.get_node("PotionsLabel").text = "POTIONS: " + str(potions)
 	move_direction = up
 	can_move = true
 	invincible_count = 0 
@@ -104,7 +107,11 @@ func move_snake():
 			if not game_started:
 				start_game()
 		if Input.is_action_just_pressed(" become_invincible") and game_started == true:
-			invincible_count = 15
+			if potions >0: 
+				potions = potions-1
+				invincible_count = 15
+				$Hud.get_node("PotionsLabel").text = "POTIONS: " + str(potions)
+				$Hud.get_node("AudioStreamPlayer").play()
 
 func start_game():
 	game_started = true
@@ -160,6 +167,7 @@ func check_food_eaten():
 	#if snake eats the food, add a segment and move the food
 	if snake_data[0] == food_pos:
 		score += 1
+		$Hud.get_node("AudioStreamPlayerFood").play()
 		$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
 		add_segment(old_data[-1])
 		move_food()
